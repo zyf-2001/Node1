@@ -43,8 +43,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 			<h2 class="sub-agileits-w3layouts">Sign In</h2>
 			<form action="/login" method="post">
 					<input type="email" name="Eamil" placeholder="Email" required="" />
-					<input type="password" name="password" placeholder="Password" required="" />
-					<a href="#" class="forgot-w3layouts">Forgot Password ?</a>
+					<input type="password" name="password" placeholder="Password" required="" pattern="\w{6,12}"/>
+					<a href="forgot" class="forgot-w3layouts">Forgot Password ?</a>
 				<div class="submit-w3l">
 					<input type="submit" value="Sign in">
 				</div>

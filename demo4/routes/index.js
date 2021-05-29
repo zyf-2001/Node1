@@ -27,13 +27,24 @@ router.get('/why', function(req, res, next) {
 router.get('/index', function(req, res, next) {
   res.render('index');
 });
-
+router.get('/forgot', function(req, res, next) {
+  res.render('forgot');
+});
+router.get('/ht', function(req, res, next) {
+  res.render('ht');
+});
+router.get('/insert', function(req, res, next) {
+  res.render('insert');
+});
+router.get('/design', function(req, res, next) {
+  res.render('design');
+});
 
 router.post('/login',(req,res)=>{
   var Eamil = req.body.Eamil
   var password = req.body.password
   var query1 = "select * from users where user_email='"+Eamil+"' and user_password='"+password+"'"
-  db.query(query1,function(err,result){
+  db.query(query1,function(err,result,fields){
       console.log(result);
       if(result ==""){
        res.send('email或password错误')
@@ -48,13 +59,27 @@ router.post('/reg',(req,res)=>{
   var repassword = req.body.repassword;
   var user = [username,password,Eamil];
   console.log(user);
-  var query1 = 'insert into users(user_name,user_email,user_password) values(?,?,?)';
-  db.query(query1,user,function(err,result){
+  var query1 = 'insert into users(user_name,user_password,user_email) values(?,?,?)';
+  db.query(query1,user,(err,result,field)=>{
   console.log(result);
-  if(password==repassword){
+  if(password==repassword&result!=""){
     res.render('login')
-  }else{res.render('login')}
+  }else{res.send('密码不一致')}
   })
 })
 
+/*router.post('/forgot',(req,res)=>{
+  var username = req.body.username;
+  var Eamil = req.body.Eamil;
+  var Newpassword = req.body.Newpassword;
+  var Newrepassword = req.body.Newrepassword;
+  var user = [username,Newpassword,Eamil];
+  console.log(user);
+  var query1 = 'insert into users(user_name,user_password,user_email) values(?,?,?)';
+  db.query(query1,user,(err,result,field)=>{
+  console.log(result);
+
+
+  })
+})*/
 module.exports = router;
