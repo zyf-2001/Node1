@@ -12,8 +12,8 @@ router.get('/login', function(req, res, next) {
 router.get('/about', function(req, res, next) {
   res.render('about');
 });
-router.get('/admission', function(req, res, next) {
-  res.render('admission');
+router.get('/blog', function(req, res, next) {
+  res.render('blog');
 });
 router.get('/reg', function(req, res, next) {
   res.render('reg');
@@ -21,8 +21,8 @@ router.get('/reg', function(req, res, next) {
 router.get('/contact', function(req, res, next) {
   res.render('contact');
 });
-router.get('/why', function(req, res, next) {
-  res.render('why');
+router.get('/support', function(req, res, next) {
+  res.render('support');
 });
 router.get('/index', function(req, res, next) {
   res.render('index');
