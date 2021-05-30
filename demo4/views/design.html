@@ -86,58 +86,33 @@
             <form name="myform" id="myform" method="post">
                 <div class="result-title">
                     <div class="result-list">
-                        <a href="insert"><i class="icon-font"></i>新增作品</a>
-                        <a id="batchDel" href="javascript:void(0)"><i class="icon-font"></i>批量删除</a>
-                        <a id="updateOrd" href="javascript:void(0)"><i class="icon-font"></i>更新排序</a>
+                        <a href="insert"><i class="icon-font"></i>新增</a>
+                        <a id="batchDel" href="javascript:void(0)"><i class="icon-font"></i>批量删除</a>
                     </div>
                 </div>
                 <div class="result-content">
                     <table class="result-tab" width="100%">
                         <tr>
-                            <th class="tc" width="5%"><input class="allChoose" name="" type="checkbox"></th>
-                            <th>排序</th>
                             <th>ID</th>
+                            <th>发表用户ID</th>
                             <th>标题</th>
-                            <th>点击</th>
-                            <th>发布人</th>
+                            <th>内容</th>
                             <th>发布时间</th>
-                            <th>评论</th>
                             <th>操作</th>
-                        </tr>
-                        <tr>
-                        
-                            <% arr.forEach((i,o)=>{ %>
+                        </tr>                           
+                            <% for(var o of data){%>
                                 <tr>
-                                    <td> <%= i.title%></td>
-                                    <td> <%= i.author%></td>
-                                    <td> <%= i.smallimg%></td>
-                                    <td> <%= i.content%></td>
-                                    
-                                    <td>
-                                       <input type="button" value="删除" class="link-del" data-id =<%= i.id%> />
-                                       <input type="button" value="修改" class="link-update" data-id =<%= o%> /></td>
+                                    <td> <%= o.article_id %></td>
+                                    <td> <%= o.user_id %></td>
+                                    <td> <%= o.article_title %></td>
+                                    <td> <%= o.article_content %></td>
+                                    <td> <%= o.article_date %></td>
+                                    <td>                                                                       
+                                    <input type="button" value="删除" class="link-del" data-id =<%= o.article_id %> />
+                                    <input type="button" value="修改" class="link-update" data-id =<%= o.article_id %> />
+                                    </td>
                                 </tr>
-                            <% })%>
-                        </tr>
-                        <tr>
-                            <td class="tc"><input name="id[]" value="58" type="checkbox"></td>
-                            <td>
-                                <input name="ids[]" value="58" type="hidden">
-                                <input class="common-input sort-input" name="ord[]" value="0" type="text">
-                            </td>
-                            <td>58</td>
-                            <td title="黑色经典"><a target="_blank" href="#" title="黑色经典">黑色经典</a> …
-                            </td>
-                            <td>0</td>
-                            <td>35</td>
-                            <td>admin</td>
-                            <td>2013-12-30 22:34:00</td>
-                            <td></td>
-                            <td>
-                                <a class="link-update" href="#">修改</a>
-                                <a class="link-del" href="#">删除</a>
-                            </td>
-                        </tr>
+                            <% }%>
                     </table>
                     <div class="list-page"> 2 条 1/1 页</div>
                 </div>

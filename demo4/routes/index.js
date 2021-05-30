@@ -36,8 +36,23 @@ router.get('/ht', function(req, res, next) {
 router.get('/insert', function(req, res, next) {
   res.render('insert');
 });
+
+/*router.get('/insert', function(req, res, next) {
+  db.query('insert into articles(article_id,user_id,article_title,article_content,article_date) values(?,?,?,?,?)',(err,results,fields)=>{
+  console.log(results);
+
+  })
+});*/
+
 router.get('/design', function(req, res, next) {
-  res.render('design');
+  db.query('select * from articles',(err,results,fields)=>{
+    console.log(results);
+    if(results!=""){
+      res.render('design',{
+        data:results
+      });
+    }
+  })
 });
 
 router.post('/login',(req,res)=>{
