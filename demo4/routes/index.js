@@ -37,12 +37,20 @@ router.get('/insert', function(req, res, next) {
   res.render('insert');
 });
 
-/*router.get('/insert', function(req, res, next) {
-  db.query('insert into articles(article_id,user_id,article_title,article_content,article_date) values(?,?,?,?,?)',(err,results,fields)=>{
-  console.log(results);
-
+router.post('/insert', function(req, res) {
+  let user_id = req.body.user_id;
+  let title = req.body.article_title;
+  let content = req.body.article_content;
+  let time = req.body.article_date;
+  console.log(user_id);
+  var qu = [user_id,title,content,time];
+  var query1 ='insert into articles(user_id,article_title,article_content,article_date) values(?,?,?,?)';
+  db.query(query1,qu,(err,result,fields)=>{
+    if(err) throw err;
+    console.log(result);
+    res.redirect('/design');
   })
-});*/
+});
 
 router.get('/design', function(req, res, next) {
   db.query('select * from articles',(err,results,fields)=>{
@@ -93,8 +101,58 @@ router.post('/reg',(req,res)=>{
   var query1 = 'insert into users(user_name,user_password,user_email) values(?,?,?)';
   db.query(query1,user,(err,result,field)=>{
   console.log(result);
-
-
   })
 })*/
+
+router.get('/del/:id',(req,res)=>{
+  delid = req.params.id;
+  console.log(delid);
+  var sql = "delete from articles where article_id='"+delid+"'";
+  db.query("select * from articles limit 1",(err,results,fields)=>{
+    console.log(results);
+    db.query(sql,(err,results,field)=>{
+      if(err) throw err;
+        console.log(results);
+        res.redirect('/design');
+    })
+    
+  })
+})
+let pas;
+router.get('/update/:id',(req,res)=>{
+  pas = req.params.id;
+  console.log(req.params.id)
+  db.query("select * from articles where article_id='"+ pas +"'",(err,result,field)=>{
+    console.log(result);
+    res.render('update',{
+    obj:result[0]
+    });
+  })
+})
+
+router.post('/update',(req,res)=>{
+  console.log(pas);
+  let user_id = req.body.user_id;
+  let title = req.body.article_title;
+  let content = req.body.article_content;
+  let time = req.body.article_date;
+  db.query("update articles set user_id=? ,article_title=? ,article_content=? ,article_date=? where article_id='"+pas+"'",[user_id,title,content,time],(err,result,field)=>{
+    console.log(result);
+    res.redirect('/design');
+  })
+})
+
+
+router.post('/search',(req,res)=>{
+  let su = req.body.title;
+  console.log(su);
+  let sql = "select * from articles where article_title like '%"+su+"%'";
+  db.query(sql,(err,results,fields)=>{
+      console.log(results);
+      if(results!=""){
+      res.render('design',{data:results})
+      }else console.log(err)
+  })
+})
+
 module.exports = router;

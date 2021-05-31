@@ -56,34 +56,42 @@
         </div>
         <div class="result-wrap">
             <div class="result-content">
-                <form action="/insert" method="POST" >
+                <form action="/update" method="POST" >
                     <table class="insert-tab" width="100%">
                         <tbody>
                             <tr>
+                                <th></th>
+                                <td>
+                                    <input class="common-text required" name="article_id" size="50" type="hidden" value="<%= obj.article_id %>">
+                                </td>
+                            </tr>
+                            <tr>
                                 <th><i class="require-red"></i>发表用户ID：</th>
                                 <td>
-                                    <input class="common-text required" id="yhID" name="user_id" size="50" type="text">
+                                    <input class="common-text required" id="yhID" name="user_id" size="50" type="text" value="<%= obj.user_id %>">
                                 </td>
                                 </tr>
                             <tr>
                                 <th><i class="require-red"></i>标题：</th>
                                 <td>
-                                    <input class="common-text required" id="title" name="article_title" size="50" type="text">
+                                    <input class="common-text required" id="title" name="article_title" size="50" type="text" value="<%= obj.article_title %>">
                                 </td>
                             </tr>
                             <tr>
                             <!--<tr>
                                 <th><i class="require-red">*</i>缩略图：</th>
-                                <td><input name="smallimg" id="" type="file"></td>
+                                <td><input name="smallimg" id="" type="file" value="<%= obj.user_id %>></td>
                             </tr>-->
                             <tr>
                                 <th>内容：</th>
-                                <td><textarea name="article_content" class="common-textarea" id="content" cols="30" style="width: 98%;" rows="10"></textarea></td>
+                                <td>
+                                    <input name="article_content" class="common-textarea" id="content" style="width: 98%;height: 118px;" rows="10" value="<%= obj.article_content %>">
+                                </td>
                             </tr>
                             <tr>
                                 <th><i class="require-red"></i>发布时间：</th>
                                 <td>
-                                    <input class="common-text required" id="title" name="article_date" size="50" type="date">
+                                    <input class="common-text required" id="title" name="article_date" size="50" type="date" value="<%= obj.article_date %>">
                                 </td>
                             </tr>
                             <tr>
